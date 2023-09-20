@@ -144,6 +144,10 @@
             </div>
             <div class="w-3/4 px-2">
                 <div class="h-12">
+                    <div class="flex justify-between">
+                        <h1 class="text-3xl font-medium text-gray-700 "></h1>
+                        <Link :href="route('stock.index')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 mr-4" >Add Stock</Link>
+                    </div>
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <!-- <div class="p-6 text-gray-900">You're logged in!</div> -->
                         <table class="min-w-max w-full table-auto">

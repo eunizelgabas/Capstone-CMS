@@ -33,6 +33,10 @@ class User extends Authenticatable
         return $this->hasMany(Sale::class, 'user_id');
     }
 
+    public function doctor(){
+        return $this->hasOne(Doctor::class, 'user_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

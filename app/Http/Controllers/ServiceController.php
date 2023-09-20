@@ -12,7 +12,7 @@ class ServiceController extends Controller
         $services = Service::orderBy('id')
             ->with('doctor')
             ->get();
-        $doctor = Doctor::orderBy('name')->get();
+        $doctor = Doctor::orderBy('id')->get();
         return inertia('Service/Index',[
             'services' => $services,
             'doctor' => $doctor

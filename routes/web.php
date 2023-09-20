@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MedCategoryController;
 use App\Http\Controllers\MedicineController;
@@ -64,6 +65,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/stock/edit/{stock}', [StockController::class, 'edit']);
     Route::put('/stock/{stock}',[StockController::class, 'update']);
     Route::delete('/stock/{stock}', [StockController::class, 'destroy']);
+
+    Route::get('/doctor/create', [DoctorController::class, 'create'])->name('doctor.create');
+    Route::get('/doctor',[DoctorController::class, 'index'])->name('doctor.index');
+    Route::post('/doctor',[DoctorController::class, 'store'])->name('doctor.create');
+    Route::get('/doctor/edit/{doctor}', [DoctorController::class, 'edit']);
+    Route::put('/doctor/{doctor}',[DoctorController::class, 'update']);
+    Route::delete('/doctor/{doctor}', [DoctorController::class, 'destroy']);
 
     Route::get('/service/create', [ServiceController::class, 'create'])->name('service.create');
     Route::get('/service',[ServiceController::class, 'index'])->name('service.index');
