@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('middlename')->nullable();
             $table->string('suffix')->nullable();
-            $table->enum('type', ['student', 'teacher', 'doctor', 'admin']);
+            // $table->enum('type', ['student', 'doctor', 'admin']);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

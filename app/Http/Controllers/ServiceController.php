@@ -10,20 +10,17 @@ class ServiceController extends Controller
 {
     public function index(){
         $services = Service::orderBy('id')
-            ->with('doctor')
             ->get();
-        $doctor = Doctor::orderBy('id')->get();
         return inertia('Service/Index',[
             'services' => $services,
-            'doctor' => $doctor
         ]);
     }
 
     public function store(Request $request) {
         $fields = $request->validate([
             'name'=>'required',
-            'doc_id'=>'required',
-            'name'=>'required',
+            // 'doc_id'=>'required',
+            'description'=>'required',
         ]);
 
         Service::create($fields);
@@ -34,8 +31,8 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service){
         $fields = $request->validate([
             'name'=>'required',
-            'doc_id'=>'required',
-            'name'=>'required',
+            // 'doc_id'=>'required',
+            'description'=>'required',
         ]);
 
         $service->update($fields);

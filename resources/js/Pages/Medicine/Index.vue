@@ -83,7 +83,7 @@
                                     <div class="py-5 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                                         <div class="flex flex-col">
                                             <label class="leading-loose">Name</label>
-                                            <input type="text" v-model="form.name" id="name" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="e.g. antibiotics">
+                                            <input type="text" v-model="form.name" id="name" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="e.g. Paracetamol">
                                             <div class="text-sm text-red-500 italic" v-if="form.errors.name">{{ form.errors.name }}</div>
                                         </div>
                                         <!-- <div class="flex flex-col">
@@ -107,7 +107,7 @@
                                               <label class="leading-loose">Type</label>
                                               <div class="relative focus-within:text-gray-600 text-gray-400 ">
                                                 <select id="type_id" name="type_id" v-model="form.type_id" class="pr-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
-                                                    <option value="" disabled>Select a medtype</option>
+                                                    <option value="" disabled>Select</option>
                                                     <option v-for="mt in type" :value="mt.id" :key="mt.id"> {{ mt.name }}</option>
                                                 </select>
                                               </div>
@@ -116,7 +116,7 @@
                                               <label class="leading-loose">Category</label>
                                               <div class="relative focus-within:text-gray-600 text-gray-400 ">
                                                 <select id="cat_id" name="cat_id" v-model="form.cat_id" class="pr-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
-                                                    <option value="" disabled>Select a category</option>
+                                                    <option value="" disabled>Select</option>
                                                     <option v-for="mc in category" :value="mc.id" :key="mc.id"> {{ mc.name }}</option>
                                                 </select>
                                               </div>

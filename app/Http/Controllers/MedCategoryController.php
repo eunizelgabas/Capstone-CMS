@@ -46,4 +46,10 @@ class MedCategoryController extends Controller
         $medcategory->update($fields);
         return redirect('/category')->with('message', "You successfully updated the medicine category");
     }
+
+    public function destroy(MedCategory $medcategory) {
+        $medcategory->delete();
+
+        return back();
+    }
 }

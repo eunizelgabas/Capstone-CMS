@@ -105,7 +105,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.suffix" />
             </div>
 
-            <div>
+            <!-- <div>
                 <InputLabel for="type" value="Type" />
 
                 <TextInput
@@ -119,7 +119,7 @@ const submit = () => {
                 />
 
                 <InputError class="mt-2" :message="form.errors.type" />
-            </div>
+            </div> -->
 
             <div class="mt-4">
                 <InputLabel for="email" value="Email" />
