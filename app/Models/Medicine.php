@@ -30,9 +30,9 @@ class Medicine extends Model
         return $this->hasMany(Stock::class, 'med_id');
     }
 
-    public function sale()
+    public function dispensing()
     {
-        return $this->hasMany(Sale::class, 'med_id');
+        return $this->hasMany(Dispensing::class, 'med_id');
     }
 }
 

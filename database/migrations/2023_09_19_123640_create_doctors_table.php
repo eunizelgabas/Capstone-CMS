@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
+            $table->string('lastname');
+            $table->string('first_name');
             $table->string('specialization');
+            $table->string('email');
+            $table->string('gender');
             $table->string('contact_no');
+            $table->boolean('status')->default(1)->comment("1-Active, 0-Inactive");
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -30,14 +30,6 @@ class MedCategoryController extends Controller
         return redirect('/category')->with('message', 'Category successfully created');
     }
 
-    // public function edit(MedCategory $medcategories)
-    // {
-    //     return inertia('MedCategory/Edit',[
-    //        'medcategories' => $medcategories,
-    //     ]);
-
-    // }
-
     public function update(Request $request, MedCategory $medcategory){
         $fields = $request->validate([
             'name'=>'required|string',

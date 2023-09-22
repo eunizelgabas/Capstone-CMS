@@ -18,13 +18,14 @@
 
 
     let props = defineProps({
-        inventories: Array,
+        stocks: Array,
         medicines: Object,
     })
 
     function edit(inv) {
     form.med_id = inv.med_id
     form.stocks = inv.qty
+
     selectedInventory = inv
     }
 
@@ -71,13 +72,13 @@
                                     <th class="py-3 px-6 text-left">Id</th>
                                     <th class="py-3 px-6 text-center">Medicine</th>
                                     <th class="py-3 px-6 text-center">Stocks</th>
+                                    <th class="py-3 px-6 text-center">Expiry Date</th>
                                     <th class="py-3 px-6 text-center">Created Date</th>
-                                    <th class="py-3 px-6 text-center">Updated Date</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 text-sm font-light" >
 
-                                <tr  class="border-b border-gray-200 hover:bg-gray-100" v-for="inv in inventories" :key="inv.id">
+                                <tr  class="border-b border-gray-200 hover:bg-gray-100" v-for="inv in stocks" :key="inv.id">
                                     <td class="py-3 px-6 text-left whitespace-nowrap">
                                         <div class="flex items-center">
 
@@ -96,12 +97,12 @@
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <p class="font-medium">{{ formattedDate(inv.created_at)}}</p>
+                                            <p class="font-medium">{{ inv.expiry_date }}</p>
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <p class="font-medium">{{ formattedDate(inv.updated_at)}}</p>
+                                            <p class="font-medium">{{ formattedDate(inv.created_at)}}</p>
                                         </div>
                                     </td>
                                 </tr>

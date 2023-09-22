@@ -9,7 +9,11 @@
 
 
     let form = useForm({
-        doc_id: '',
+        lastname: '',
+        firstname: '',
+        status: '',
+        email:'',
+        gender: '',
         specialization: '',
         contact_no: '',
     })
@@ -18,14 +22,17 @@
 
     let props = defineProps({
         doctors: Array,
-        user: Object,
     })
 
     function edit(doc) {
-    form.doc_id = doc.med_id
+    form.lastname = doc.lastname,
+    form.firstname = doc.firstname,
+    form.email =  doc.email,
+    form.gender =  doc.gender,
+    form.status = doc.status,
     form.specialization = doc.qty
     form.contact_no = doc.qty
-    selectedDoctor = inv
+    selectedDoctor = doc
     }
 
     function remove(doc) {
@@ -36,12 +43,20 @@
     const submit = () =>{
         if(selectedDoctor) {
             form.put('/doctor/' + selectedDoctor.id)
-            form.doc_id = ""
+            form.lastname = ""
+            form.firstname =""
+            form.email=""
+            form.gender=""
+            form.status=""
             form.specialization = ""
             form.contact_no = ""
             }else {
             form.post('/doctor')
-            form.doc_id = ""
+            form.lastname = ""
+            form.firstname =""
+            form.email=""
+            form.gender=""
+            form.status=""
             form.specialization = ""
             form.contact_no = ""
         }
@@ -69,8 +84,10 @@
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-left">Id</th>
                                     <th class="py-3 px-6 text-center">Doctor Name</th>
+                                    <th class="py-3 px-6 text-center">Gender</th>
                                     <th class="py-3 px-6 text-center">Specialization</th>
                                     <th class="py-3 px-6 text-center">Contact No</th>
+                                    <th class="py-3 px-6 text-center">Status</th>
                                     <th class="py-3 px-6 text-center">Action</th>
                                 </tr>
                             </thead>
@@ -85,7 +102,12 @@
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <p class="font-medium">{{ doc.user.firstname }} {{ doc.user.lastname }}</p>
+                                            <p class="font-medium">{{ doc.firstname }} {{ doc.lastname }}</p>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        <div class="flex items-center justify-center">
+                                            <p class="font-medium">{{ doc.gender }}</p>
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-center">

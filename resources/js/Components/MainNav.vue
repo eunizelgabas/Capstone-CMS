@@ -94,7 +94,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
                           </svg>
                       <span class="text-base leading-2" v-show="!collapse">Manage Stock</span>
                     </Link> -->
-                    <Link :href="route('inventory.index')" class="flex justify-start items-center space-x-6 hover:bg-gray-50 text-white hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 rounded px-3 py-2 w-full">
+                    <!-- <Link :href="route('inventory.index')" class="flex justify-start items-center space-x-6 hover:bg-gray-50 text-white hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 rounded px-3 py-2 w-full">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14 8.00002C15.1046 8.00002 16 7.10459 16 6.00002C16 4.89545 15.1046 4.00002 14 4.00002C12.8954 4.00002 12 4.89545 12 6.00002C12 7.10459 12.8954 8.00002 14 8.00002Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M4 6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -107,7 +107,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
                         <path d="M19 18H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                       </svg>
                       <span class="text-base leading-4" v-show="!collapse">Inventory</span>
-                    </Link>
+                    </Link> -->
                   </div>
                 </div>
               </li>

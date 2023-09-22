@@ -49,7 +49,7 @@ class StockController extends Controller
         }
 
 
-        return redirect()->route('inventory.index')->with('message', 'Stock successfully added');
+        return redirect()->route('medicine.index')->with('message', 'Stock successfully added');
     }
 
     public function update(Request $request, Stock $stock){

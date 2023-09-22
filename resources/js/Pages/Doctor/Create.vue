@@ -6,13 +6,17 @@
 
     let form = useForm({
         doc_id: '',
+        lastname: '',
+        firstname:'',
+        email:'',
+        status:'',
+        gender:'',
         specialization: '',
         contact_no: '',
     })
 
     let props = defineProps({
         doctors: Array,
-        user: Object,
     })
 
     const submit = () =>{
@@ -39,25 +43,75 @@
                           <div class="divide-y divide-gray-200">
                                 <form class="" @submit.prevent="submit">
                                     <div class="py-5 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                                        <div class="flex flex-col">
+                                        <!-- <div class="flex flex-col">
                                             <label class="leading-loose">Firstname</label>
-                                            <input type="number" v-model="form.qty" id="qty" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="e.g. 100">
+                                            <input type="text" v-model="form.firstname" id="qty" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
                                             <div class="text-sm text-red-500 italic" v-if="form.errors.qty">{{ form.errors.qty }}</div>
                                         </div>
                                         <div class="flex flex-col">
                                             <label class="leading-loose">Lastname</label>
-                                            <input type="number" v-model="form.qty" id="qty" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="e.g. 100">
-                                            <div class="text-sm text-red-500 italic" v-if="form.errors.qty">{{ form.errors.qty }}</div>
+                                            <input type="text" v-model="form.lastname" id="lastname" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" >
+                                            <div class="text-sm text-red-500 italic" v-if="form.errors.lastname">{{ form.errors.lastname }}</div>
+                                        </div> -->
+                                        <div class="flex items-center space-x-6">
+                                            <div class="w-1/2">
+                                                <div class="flex flex-col">
+                                                    <label class="leading-loose">Firstname</label>
+                                                    <input type="text" v-model="form.firstname" id="qty" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                                                </div>
+                                            </div>
+                                            <div class="w-1/2">
+                                                <div class="flex flex-col">
+                                                    <label class="leading-loose">Lastname</label>
+                                                    <input type="text" v-model="form.lastname" id="lastname" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" >
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="flex items-center space-x-6">
+                                            <div class="flex flex-col">
+                                                <div class="w-1/2">
+                                                    <label class="leading-loose">Gender</label>
+                                                    <select id="gender" name="gender" v-model="form.gender" class="pr-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                                                    <option value="" disabled>Select a gender</option>
+                                                    <option value="female" >Female</option>
+                                                    <option value="male" >Male</option>
+                                                </select>
+                                                <div class="text-sm text-red-500 italic" v-if="form.errors.gender">{{ form.errors.gender }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="w-1/2">
+                                                <div class="flex flex-col">
+                                                    <label class="leading-loose">Specialization</label>
+                                                    <input type="text" v-model="form.specialization" id="specialization" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                                                    <div class="text-sm text-red-500 italic" v-if="form.errors.specialization">{{ form.errors.specialization }}</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- <div class="flex flex-col">
+                                            <label class="leading-loose">Gender</label>
+                                            <select id="gender" name="gender" v-model="form.gender" class="pr-4 py-2  border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                                                <option value="" disabled>Select a gender</option>
+                                                <option value="female" >Female</option>
+                                                <option value="male" >Male</option>
+                                            </select>
+                                            <div class="text-sm text-red-500 italic" v-if="form.errors.cat_id">{{ form.errors.cat_id }}</div>
                                         </div>
                                         <div class="flex flex-col">
                                             <label class="leading-loose">Specialization</label>
-                                            <input type="number" v-model="form.qty" id="qty" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="e.g. 100">
-                                            <div class="text-sm text-red-500 italic" v-if="form.errors.qty">{{ form.errors.qty }}</div>
+                                            <input type="text" v-model="form.specialization" id="specialization" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                                            <div class="text-sm text-red-500 italic" v-if="form.errors.specialization">{{ form.errors.specialization }}</div>
+                                        </div> -->
+                                        <div class="flex flex-col">
+                                            <label class="leading-loose">Email</label>
+                                            <input type="email" v-model="form.email" id="email" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                                            <div class="text-sm text-red-500 italic" v-if="form.errors.email">{{ form.errors.email }}</div>
                                         </div>
                                         <div class="flex flex-col">
                                             <label class="leading-loose">Contact No</label>
-                                            <input type="date" v-model="form.expiry_date" id="expiry_date" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="e.g. antibiotics">
-                                            <div class="text-sm text-red-500 italic" v-if="form.errors.expiry_date">{{ form.errors.expiry_date }}</div>
+                                            <input type="number" v-model="form.contact_no" id="expiry_date" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                                            <div class="text-sm text-red-500 italic" v-if="form.errors.contact_no">{{ form.errors.contact_no }}</div>
                                         </div>
                                     </div>
                                     <div class="flex items-center space-x-4">
