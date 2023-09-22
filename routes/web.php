@@ -79,6 +79,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/service/edit/{service}', [ServiceController::class, 'edit']);
     Route::put('/service/{service}',[ServiceController::class, 'update']);
     Route::delete('/service/{service}', [ServiceController::class, 'destroy']);
+
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+        Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
+        Route::resource('appointments', AppointmentController::class);
+    });
 });
 
 
