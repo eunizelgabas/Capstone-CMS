@@ -11,12 +11,13 @@ const props = defineProps({
     },
 });
 const form = useForm({
-    appointment_no: '',
+    name: '',
+    // appointment_no: '',
     appointment_date: '',
     appointment_time: '',
     service: '',
     status: '',
-    patient: '',
+    // patient: '',
 
 });
 
@@ -43,8 +44,17 @@ const submit = () => {
                         <h1 class="text-2xl font-semibold text-gray-800 leading-tight">Add New Appointment</h1>
                     </div>
                     <div class="p-4">
-                        <!-- Fields Here -->
                         <div class="flex items-center mb-4">
+                            <label for="name" class="border rounded-l-lg py-2.5 px-2 text-sm bg-gray-100 select-none">Name</label>
+                            <TextInput
+                                v-model="form.name"
+                                type="text"
+                                id="name"
+                                class="flex-1"
+                            />
+                        </div>
+                        <!-- Fields Here -->
+                        <!-- <div class="flex items-center mb-4">
                             <label for="appointment_no" class="border rounded-l-lg py-2.5 px-2 text-sm bg-gray-100 select-none">Appointment no.</label>
                             <TextInput
                                 v-model="form.appointment_no"
@@ -52,7 +62,7 @@ const submit = () => {
                                 id="appointment_no"
                                 class="flex-1"
                             />
-                        </div>
+                        </div> -->
 
                         <div class="flex items-center mb-4">
                             <label for="app-date" class="border rounded-l-lg py-2.5 px-2 text-sm bg-gray-100 select-none">Date</label>
@@ -74,19 +84,19 @@ const submit = () => {
                             />
                         </div>
 
-                        <!-- <div class="flex items-center mb-4">
+                         <!-- <div class="flex items-center mb-4">
                             <label for="patient" class="border rounded-l-lg py-2.5 px-2 text-sm bg-gray-100 select-none">Patient</label>
                             <select name="" id="patient" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm flex-1">
                                 <option value="">Select Patient</option>
                             </select>
-                        </div>
+                        </div> -->
 
                         <div class="flex items-center mb-4">
                             <label for="service" class="border rounded-l-lg py-2.5 px-2 text-sm bg-gray-100 select-none">Service</label>
                             <select name="" id="service" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm flex-1">
                                 <option value="">Select Service</option>
                             </select>
-                        </div> -->
+                        </div>
 
                         <div class="flex justify-end">
                             <button type="submit" @click="submit" class="px-4 py-2 rounded-lg text-sm bg-blue-600 hover:bg-blue-500 text-white">Submit</button>

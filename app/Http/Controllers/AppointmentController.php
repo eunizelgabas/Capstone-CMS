@@ -17,13 +17,35 @@ class AppointmentController extends Controller
     {
         return inertia('Appointment/Create');
     }
+
+    public function edit(Appointment $appointment)
+    {
+    return Inertia::render('Appointment/Edit', ['appointment' => $appointment]);
+    }
+
+    public function update(Request $request, Appointment $appointment)
+    {
+    $fields = $request->validate([
+        'name' => 'required|string',
+        'appointment_date' => 'required|date',
+        'appointment_time' => 'required|time',
+        'service_id' => 'required|string',
+        'status' => 'required|string',
+    ]);
+
+    $appointment->update($fields);
+
+    return redirect('/appointments')->with('info', 'Appointment Updated!.');
+    }
     public function store(Request $request)
     {
        $fields = $request->validate([
+            'name' => 'required|string',
             'appointment_date' => 'required|date',
             'appointment_time' => 'required|time',
-            // 'service' => 'required|string',
+            'service_id' => 'required|string',
             'status' => 'required|string',
+            // 'service' => 'required|string',
             // 'patient' => 'required|string',
         ]);
 

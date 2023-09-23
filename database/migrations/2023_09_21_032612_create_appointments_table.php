@@ -14,17 +14,17 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('appointment_no');
+            // $table->tinyInteger('appointment_no');
             $table->date('appointment_date');
             $table->time('appointment_time');
             $table->unsignedBigInteger('service_id');
-            $table->unsignedBigInteger('doctor_id');
+            // $table->unsignedBigInteger('doctor_id');
             $table->string('status', 50);
             // $table->unsignedBigInteger('patient_id');
             $table->timestamps();
 
             // $table->foreign('patient_id')->references('id')->on('patients');
-            $table->foreign('doctor_id')->references('id')->on('doctors');
+            // $table->foreign('doctor_id')->references('id')->on('doctors');
             $table->foreign('service_id')->references('id')->on('services');
         });
     }
