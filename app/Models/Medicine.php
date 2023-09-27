@@ -34,5 +34,9 @@ class Medicine extends Model
     {
         return $this->hasMany(Dispensing::class, 'med_id');
     }
+
+    public function temporary(){
+        return $this->hasMany(TemporaryStock::class);
+    }
 }
 

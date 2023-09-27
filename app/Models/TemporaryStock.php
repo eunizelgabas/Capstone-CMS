@@ -5,18 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Stock extends Model
+class TemporaryStock extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['med_id',  'qty', 'expiry_date'];
+    protected $fillable = ['med_id', 'qty','expiry_date'];
 
-    public function medicine()
-    {
+    public function medicine(){
         return $this->belongsTo(Medicine::class, 'med_id');
     }
-
-    // public function inventory(){
-    //     return $this->has
-    // }
 }

@@ -3,8 +3,9 @@
     import Modal from  '@/Components/Modal.vue';
     import DangerButton from '@/Components/DangerButton.vue';
     import SecondaryButton from '@/Components/SecondaryButton.vue';
-    import { ref } from 'vue';
-    import { useForm, Link } from '@inertiajs/vue3';
+    import Pagination from '@/Components/Pagination.vue'
+    import { ref, watch } from 'vue';
+    import { useForm, Link, Head,router } from '@inertiajs/vue3'
 
     let showConfirmDelete = ref(false)
     let selectedTypeForDelete = null
@@ -19,6 +20,7 @@
 
     let props = defineProps({
     medtypes: Array,
+    filters:Object,
     })
 
     function edit(type) {
@@ -49,9 +51,22 @@
             form.name = "";
         }
     }
+
+    let search = ref(props.filters.search);
+    watch(search, (value) => {
+        router.get(
+            "/type",
+            { search: value },
+            {
+                preserveState: true,
+                replace: true,
+            }
+        );
+    });
 </script>
 
 <template>
+    <Head title="Medicine Type"/>
     <Sidebar>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Medicine Type</h2>
@@ -93,7 +108,22 @@
                 <div class="h-12">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <!-- <div class="p-6 text-gray-900">You're logged in!</div> -->
-                        <table class="min-w-max w-full table-auto">
+                        <div class="mt-4 mr-0 mb-0 ml-0 sm:mt-0">
+                            <p class="sr-only">Search Medicine Type</p>
+                            <div class="relative">
+                                <div class="flex items-center pt-0 pr-0 pb-0 pl-3 absolute inset-y-0 left-0 pointer-events-none">
+                                    <p>
+                                    <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24"
+                                        stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21
+                                        21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                    </p>
+                                </div>
+                                <input placeholder="Search Type" type="search" class="border block pt-2 pr-0 pb-2 pl-10 py-2
+                                    border-blue-300 rounded-lg focus:ring-blue-600 focus:border-blue-600 sm:text-sm"
+                                    v-model="search"/>
+                            </div>
+                        </div>
+                        <table class=" mt-5 min-w-max w-full table-auto">
                             <thead>
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-left">Id</th>
@@ -102,8 +132,10 @@
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 text-sm font-light" >
-
-                                <tr  class="border-b border-gray-200 hover:bg-gray-100" v-for="type in medtypes" :key="type.id">
+                                <tr v-if="medtypes.length === 0">
+                                    <td colspan="12">No Available Medicine</td>
+                                  </tr>
+                                <tr  class="border-b border-gray-200 hover:bg-gray-100" v-for="type in medtypes.data" :key="type.id">
                                     <td class="py-3 px-6 text-left whitespace-nowrap">
                                         <div class="flex items-center">
 
@@ -162,6 +194,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <Pagination :links="medtypes.links" class="mt-6 text-center"/>
                 </div>
             </div>
 

@@ -11,7 +11,8 @@ const form = useForm({
     firstname: '',
     middlename: '',
     suffix: '',
-    type: '',
+    gender: '',
+    contact_no: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -105,21 +106,43 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.suffix" />
             </div>
 
-            <!-- <div>
+            <div>
                 <InputLabel for="type" value="Type" />
 
                 <TextInput
-                    id="type"
-                    type="text"
+                    id="contact_no"
+                    type="number"
                     class="mt-1 block w-full"
-                    v-model="form.type"
+                    v-model="form.contact_no"
                     required
                     autofocus
-                    autocomplete="type"
+                    autocomplete="contact_no"
                 />
 
-                <InputError class="mt-2" :message="form.errors.type" />
-            </div> -->
+                <InputError class="mt-2" :message="form.errors.contact_no" />
+            </div>
+
+            <div>
+                <InputLabel for="type" value="Type" />
+
+                    <select id="gender" name="gender" v-model="form.gender"  class="mt-1 block w-full">
+                        <option value="" disabled>Select gender</option>
+                        <option value="Male"> Male</option>
+                        <option value="Female"> Female</option>
+                    </select>
+                <!-- <Select
+                    id="contact_no"
+                    type="number"
+                    class="mt-1 block w-full"
+                    v-model="form.contact_no"
+                    required
+                    autofocus
+                    autocomplete="contact_no"
+                /> -->
+
+                <InputError class="mt-2" :message="form.errors.gender" />
+            </div>
+
 
             <div class="mt-4">
                 <InputLabel for="email" value="Email" />

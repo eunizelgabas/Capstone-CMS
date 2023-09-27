@@ -12,8 +12,10 @@ class StockController extends Controller
 
     public function index(){
         $medicine = Medicine::orderBy('name')->get();
-        return inertia('Inventory/Create',[
-            'medicine' => $medicine
+        $stocks   = Stock::orderBy('id')->with('medicine')->get();
+        return inertia('Stock/Index',[
+            'medicine' => $medicine,
+            'stocks'    =>$stocks
         ]);
     }
 
@@ -22,7 +24,7 @@ class StockController extends Controller
         return inertia('Inventory/Create',[
             'inventories' => Inventory::orderBy('created_at','asc'),
             'stocks' => Stock::orderBy('created_at','asc')
-            ->with('medicine', 'inventory')->get(),
+            ->with('medicine')->get(),
             'medicine' => $medicine,
         ]);
     }
@@ -49,7 +51,7 @@ class StockController extends Controller
         }
 
 
-        return redirect()->route('medicine.index')->with('message', 'Stock successfully added');
+        return redirect()->route('stock.index')->with('message', 'Stock successfully added');
     }
 
     public function update(Request $request, Stock $stock){

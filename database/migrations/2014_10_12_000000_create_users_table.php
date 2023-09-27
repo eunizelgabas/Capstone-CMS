@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('middlename')->nullable();
             $table->string('suffix')->nullable();
+            $table->string('gender');
             // $table->enum('type', ['student', 'doctor', 'admin']);
             $table->string('email')->unique();
+            $table->string('contact_no');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

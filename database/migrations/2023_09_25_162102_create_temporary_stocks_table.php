@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('doctors', function (Blueprint $table) {
+        Schema::create('temporary_stocks', function (Blueprint $table) {
             $table->id();
-            $table->string('specialization');
-            $table->bigInteger('user_id')->unsigned();
-            $table->boolean('status')->default(1)->comment("1-active, 0-inactive");
+            $table->bigInteger('med_id')->unsigned();
+            $table->integer('qty');
+            $table->date('expiry_date');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('doctors');
+        Schema::dropIfExists('temporary_stocks');
     }
 };

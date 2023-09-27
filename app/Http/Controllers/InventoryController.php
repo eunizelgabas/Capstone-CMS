@@ -10,17 +10,16 @@ use Illuminate\Http\Request;
 class InventoryController extends Controller
 {
     public function index(){
-        $medicines = Medicine::orderBy('name')->get();
+        $medicine = Medicine::orderBy('name')->get();
         $stocks = Stock::orderBy('id')->get();
         $inventories = Inventory::orderBy('id')
         ->with('medicine')->get();
         return inertia('Inventory/Index',[
             'inventories' => $inventories,
-            'medicines' => $medicines,
+            'medicine' => $medicine,
             'stocks' => $stocks
 
         ]);
     }
-
 
 }

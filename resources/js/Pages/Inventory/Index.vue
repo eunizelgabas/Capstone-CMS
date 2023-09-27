@@ -2,7 +2,7 @@
     import Sidebar from '@/Layouts/Sidebar.vue';
     import ConfirmDialog from '@/Components/ConfirmDialog.vue';
     import { ref } from 'vue';
-    import { Link, useForm } from '@inertiajs/vue3';
+    import { Link, useForm,Head } from '@inertiajs/vue3';
     import moment from 'moment'
 
     let showConfirm = ref(false)
@@ -18,8 +18,8 @@
 
 
     let props = defineProps({
-        stocks: Array,
-        medicines: Object,
+        inventories: Array,
+        medicine: Object,
     })
 
     function edit(inv) {
@@ -47,10 +47,11 @@
     }
     function formattedDate(date){
         return moment(date).format('MMMM   D, YYYY');
-}
+    }
 </script>
 
 <template>
+    <Head title="Inventory" />
     <Sidebar>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Medicine Inventory</h2>
@@ -78,7 +79,7 @@
                             </thead>
                             <tbody class="text-gray-600 text-sm font-light" >
 
-                                <tr  class="border-b border-gray-200 hover:bg-gray-100" v-for="inv in stocks" :key="inv.id">
+                                <tr  class="border-b border-gray-200 hover:bg-gray-100" v-for="inv in inventories" :key="inv.id">
                                     <td class="py-3 px-6 text-left whitespace-nowrap">
                                         <div class="flex items-center">
 
@@ -97,12 +98,12 @@
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <p class="font-medium">{{ inv.expiry_date }}</p>
+                                            <p class="font-medium">{{ formattedDate(inv.created_at)}}</p>
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <p class="font-medium">{{ formattedDate(inv.created_at)}}</p>
+                                            <p class="font-medium">{{ formattedDate(inv.updated_at)}}</p>
                                         </div>
                                     </td>
                                 </tr>

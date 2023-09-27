@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DispensingController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MedCategoryController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\MedTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\TemporaryStockController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,7 +32,10 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+    // return Inertia::render('Auth.Login');
 });
+
+// Route::post('/', [LoginController::class, 'login']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -58,9 +63,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
 
+    Route::get('/stock/create', [StockController::class, 'create'])->name('inventory.create');
 
-    Route::get('/stock/create', [InventoryController::class, 'create'])->name('inventory.create');
-    Route::get('/stock',[StockController::class, 'index'])->name('stock.index');
+    Route::get('/stock',[TemporaryStockController::class, 'index'])->name('stock.index');
     Route::post('/stock',[StockController::class, 'store'])->name('stock.create');
     Route::get('/stock/edit/{stock}', [StockController::class, 'edit']);
     Route::put('/stock/{stock}',[StockController::class, 'update']);
@@ -79,6 +84,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/service/edit/{service}', [ServiceController::class, 'edit']);
     Route::put('/service/{service}',[ServiceController::class, 'update']);
     Route::delete('/service/{service}', [ServiceController::class, 'destroy']);
+
+    Route::get('/dispense', [DispensingController::class, 'index'])->name('dispense.index');
+    Route::put('/dispense/{dispense}',[DispensingController::class, 'update']);
+    Route::post('/dispense',[DispensingController::class, 'store']);
+    Route::delete('/dispense/{dispense}', [DispensingController::class, 'destroy']);
 });
 
 

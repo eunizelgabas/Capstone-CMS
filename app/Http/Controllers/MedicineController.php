@@ -7,6 +7,8 @@ use App\Models\MedCategory;
 use App\Models\Medicine;
 use App\Models\MedType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as HttpRequest;
+
 
 class MedicineController extends Controller
 {
@@ -14,17 +16,30 @@ class MedicineController extends Controller
         $type = MedType::orderBy('name')->get();
         $category = MedCategory::orderBy('name')->get();
         $inventory = Inventory::orderBy('created_at', 'asc')->get();
-        $medicines = Medicine::orderBy('id')
+
+            $medicineQuery = Medicine::orderBy('created_at', 'desc')
             ->with('type')
             ->with('category')
-            ->with('inventory')
-            ->get();
+            ->with('inventory');
+
+        $search = HttpRequest::input('search');
+        if ($search) {
+            $medicineQuery->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('measurement', 'like', '%' . $search . '%');
+            });
+        }
+
+        $medicines = $medicineQuery->paginate(8)->withQueryString();
+
         return inertia('Medicine/Index',[
             'medicines' => $medicines,
             'type'      => $type,
             'category'  => $category,
-            'inventory' =>$inventory
-        ]);
+            'inventory' =>$inventory,
+            'filters' => HttpRequest::only(['search'])
+            ]);
     }
 
 
@@ -54,5 +69,11 @@ class MedicineController extends Controller
 
         $medicine->update($fields);
         return redirect('/medicine')->with('message', "You successfully updated the medicine category");
+    }
+
+    public function destroy(Medicine $medicine) {
+        $medicine->delete();
+
+        return back();
     }
 }
