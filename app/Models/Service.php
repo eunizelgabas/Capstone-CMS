@@ -11,8 +11,8 @@ class Service extends Model
 
     protected $fillable = ['doc_id', 'name' , 'description'];
 
-    // public function doctor()
-    // {
-    //     return $this->belongsTo(Doctor::class, 'doc_id');
-    // }
+    public function doctor()
+    {
+        return $this->hasMany(Service::class, 'doc_id');
+    }
 }

@@ -9,14 +9,14 @@ class Stock extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['med_id',  'qty', 'expiry_date'];
+    protected $fillable = ['med_id', 'purchase_date' , 'qty', 'expiry_date'];
 
     public function medicine()
     {
         return $this->belongsTo(Medicine::class, 'med_id');
     }
 
-    // public function inventory(){
-    //     return $this->has
+    // public function stocks(){
+    //     return $this->hasMany(Inventory::class);
     // }
 }

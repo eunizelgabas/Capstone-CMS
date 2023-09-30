@@ -17,7 +17,8 @@ return new class extends Migration
             $table->bigInteger('type_id')->unsigned();
             $table->string('name');
             $table->string('measurement');
-            $table->string('description');
+            // $table->string('description');
+            $table->integer('stock');
             $table->timestamps();
             $table->foreign('cat_id')->references('id')->on('med_categories');
             $table->foreign('type_id')->references('id')->on('med_types');

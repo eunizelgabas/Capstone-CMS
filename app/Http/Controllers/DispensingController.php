@@ -30,9 +30,14 @@ class DispensingController extends Controller
 
         $des  =  Dispensing::create($fields);
 
+        
+        $medicine = Medicine::findOrFail($fields['med_id']);
+        $medicine->decrement('stock', $fields['qty']);
+
         $inventory = Inventory::where('med_id', $des->med_id)->first();
-        if ($inventory) {
-            $inventory->stocks -= $des->qty;
+        if($inventory){
+            $inventory->stock_out += $des->qty;
+            // $inventory->stock_in += $stock->qty;
             $inventory->save();
         }
 

@@ -21,11 +21,26 @@ class MedCategoryController extends Controller
             'medcategories' => MedCategory::query()
                     ->when(HttpRequest::input('search'), function ($query, $search) {
                         $query->where('name', 'like', '%' . $search . '%');
-                    })->paginate(8)
+                    })->paginate(6)
                     ->withQueryString(),
                     'filters' => HttpRequest::only(['search'])
+                    // $hidePagination = $medcategories->isEmpty() || $medcategories->count() <= $medcategories->perPage()
             ]);
 
+//         $medcategories = MedCategory::query()
+//     ->when(HttpRequest::input('search'), function ($query, $search) {
+//         $query->where('name', 'like', '%' . $search . '%');
+//     })
+//     ->paginate(8)
+//     ->withQueryString();
+
+// $hidePagination = $medcategories->isEmpty() || $medcategories->count() <= $medcategories->perPage();
+
+// return inertia('MedCategory/Index', [
+//     'medcategories' => $medcategories,
+//     'filters' => HttpRequest::only(['search']),
+//     'hidePagination' => $hidePagination, // Move this line outside of the array
+// ]);
 
     }
 

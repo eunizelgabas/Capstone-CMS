@@ -5,7 +5,7 @@
     import SecondaryButton from '@/Components/SecondaryButton.vue';
     import Pagination from '@/Components/Pagination.vue'
     import { ref, watch } from 'vue';
-    import { useForm, router, Link } from '@inertiajs/vue3';
+    import { useForm, router, Link, Head} from '@inertiajs/vue3';
 
     let showConfirm = ref(false)
     let selectedMedicineForDelete = null
@@ -16,8 +16,9 @@
         name: '',
         cat_id: '',
         type_id: '',
+        stock: '',
         measurement: '',
-        description: ''
+        // description: ''
     })
 
     let deleteForm = useForm({});
@@ -38,7 +39,8 @@
     form.cat_id = med.cat_id
     form.type_id = med.type_id
     form.measurement = med.measurement
-    form.description = med.description
+    // form.description = med.description
+    form.stock = med.stock
     selectedMedicine = med
     }
 
@@ -49,14 +51,16 @@
             form.cat_id = "",
             form.type_id = "",
             form.measurement = "",
-            form.description = ""
+            form.stock = ""
+            // form.description = ""
             }else {
             form.post('/medicine')
             form.name = "";
             form.cat_id = "",
             form.type_id = "",
             form.measurement = "",
-            form.description = ""
+            form.stock = ""
+            // form.description = ""
         }
     }
 
@@ -84,6 +88,7 @@
 </script>
 
 <template>
+    <Head title="Medicine"/>
     <Sidebar>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Medicine</h2>
@@ -129,16 +134,17 @@
                                         <div class="flex items-center space-x-6">
                                             <div class="flex flex-col">
                                               <label class="leading-loose">Type</label>
-                                              <div class="relative focus-within:text-gray-600 text-gray-400 ">
+                                              <div class="relative focus-within:text-gray-600 text-gray-400 sm:col-span-2 ">
                                                 <select id="type_id" name="type_id" v-model="form.type_id" class="pr-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
                                                     <option value="" disabled>Select</option>
                                                     <option v-for="mt in type" :value="mt.id" :key="mt.id"> {{ mt.name }}</option>
                                                 </select>
                                               </div>
                                             </div>
+
                                             <div class="flex flex-col">
                                               <label class="leading-loose">Category</label>
-                                              <div class="relative focus-within:text-gray-600 text-gray-400 ">
+                                              <div class="relative focus-within:text-gray-600 text-gray-400 sm:col-span-2 ">
                                                 <select id="cat_id" name="cat_id" v-model="form.cat_id" class="pr-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
                                                     <option value="" disabled>Select</option>
                                                     <option v-for="mc in category" :value="mc.id" :key="mc.id"> {{ mc.name }}</option>
@@ -152,10 +158,15 @@
                                             <div class="text-sm text-red-500 italic" v-if="form.errors.measurement">{{ form.errors.measurement }}</div>
                                         </div>
                                         <div class="flex flex-col">
+                                            <label class="leading-loose">Initial Stock</label>
+                                            <input type="text" v-model="form.stock" id="stock" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                                            <div class="text-sm text-red-500 italic" v-if="form.errors.stock">{{ form.errors.stock }}</div>
+                                        </div>
+                                        <!-- <div class="flex flex-col">
                                             <label class="leading-loose">Description</label>
                                             <textarea type="text" v-model="form.description" id="description" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="e.g. antibiotics"></textarea>
                                             <div class="text-sm text-red-500 italic" v-if="form.errors.description">{{ form.errors.description }}</div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="flex items-center space-x-4">
                                         <button type="submit" class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">Save</button>
@@ -175,7 +186,7 @@
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <!-- <div class="p-6 text-gray-900">You're logged in!</div> -->
                         <div class="mt-4 mr-0 mb-0 ml-0 sm:mt-0">
-                            <p class="sr-only">Search Medicine Type</p>
+                            <p class="sr-only">Search Medicine</p>
                             <div class="relative">
                                 <div class="flex items-center pt-0 pr-0 pb-0 pl-3 absolute inset-y-0 left-0 pointer-events-none">
                                     <p>
@@ -184,7 +195,7 @@
                                         21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                                     </p>
                                 </div>
-                                <input placeholder="Search Category" type="search" class="border block pt-2 pr-0 pb-2 pl-10 py-2
+                                <input placeholder="Search Medicine" type="search" class="border block pt-2 pr-0 pb-2 pl-10 py-2
                                     border-blue-300 rounded-lg focus:ring-blue-600 focus:border-blue-600 sm:text-sm"
                                     v-model="search"/>
                             </div>
@@ -197,7 +208,7 @@
                                     <th class="py-3 px-6 text-center">Type</th>
                                     <th class="py-3 px-6 text-center">In stocks</th>
                                     <th class="py-3 px-6 text-center">Measurement</th>
-                                    <th class="py-3 px-6 text-center">Description</th>
+                                    <!-- <th class="py-3 px-6 text-center">Description</th> -->
                                     <th class="py-3 px-6 text-center">Action</th>
                                 </tr>
                             </thead>
@@ -225,7 +236,7 @@
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <p class="font-medium">{{med.inventory ? med.inventory.stocks :  0}}</p>
+                                            <p class="font-medium">{{med.stock}}</p>
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-center">
@@ -233,30 +244,30 @@
                                             <p class="font-medium">{{ med.measurement }}</p>
                                         </div>
                                     </td>
-                                    <td class="py-3 px-6 text-center">
+                                    <!-- <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
                                             <p class="font-medium">{{ med.description }}</p>
                                         </div>
-                                    </td>
+                                    </td> -->
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex item-center justify-center">
                                             <Modal :show="showConfirm" @close="closeModal"></Modal>
-                                            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                            <!-- <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                 </svg>
 
-                                            </div>
+                                            </div> -->
                                             <div class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110">
-                                                <a href="#" class="btn" @click="edit(med)">
+                                                <a href="#" class="btn" @click="edit(med)" title="Edit Medicine">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                     </svg>
                                                 </a>
                                             </div>
                                             <div class="w-4  ml-2 mr-2 transform hover:text-red-500 hover:scale-110">
-                                                <a href="#" @click="remove(med)" class="btn">
+                                                <a href="#" @click="remove(med)" class="btn" title="Delete Medicine">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                     </svg>

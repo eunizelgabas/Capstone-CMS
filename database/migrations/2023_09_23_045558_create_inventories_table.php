@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('temporary_stocks', function (Blueprint $table) {
+        Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('med_id')->unsigned();
-            $table->integer('qty');
-            $table->date('expiry_date');
+            $table->integer('stock_in')->nullable();
+            $table->integer('stock_out')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('temporary_stocks');
+        Schema::dropIfExists('inventories');
     }
 };

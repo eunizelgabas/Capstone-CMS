@@ -4,6 +4,7 @@
     import { ref } from 'vue';
     import { Link, useForm,Head } from '@inertiajs/vue3';
     import moment from 'moment'
+    
 
     let showConfirm = ref(false)
     let selectedInventoryForDelete = null
@@ -15,36 +16,15 @@
         stocks: '',
     })
 
-
+    
 
     let props = defineProps({
         inventories: Array,
         medicine: Object,
+        totalAvail : Number
     })
 
-    function edit(inv) {
-    form.med_id = inv.med_id
-    form.stocks = inv.qty
 
-    selectedInventory = inv
-    }
-
-    function remove(inv) {
-        selectedInventoryForDelete = inv
-        showConfirm.value = true;
-    }
-
-    const submit = () =>{
-        if(selectedInventory) {
-            form.put('/inventory/' + selectedMedicine.id)
-            form.med_id = "";
-            form.stocks = ""
-            }else {
-            form.post('/inventory')
-            form.med_id = "";
-            form.stocks = ""
-        }
-    }
     function formattedDate(date){
         return moment(date).format('MMMM   D, YYYY');
     }
@@ -72,9 +52,10 @@
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-left">Id</th>
                                     <th class="py-3 px-6 text-center">Medicine</th>
-                                    <th class="py-3 px-6 text-center">Stocks</th>
-                                    <th class="py-3 px-6 text-center">Expiry Date</th>
-                                    <th class="py-3 px-6 text-center">Created Date</th>
+                                    <th class="py-3 px-6 text-center">Stock In</th>
+                                    <th class="py-3 px-6 text-center">Stock Out</th>
+                                    <th class="py-3 px-6 text-center">Stocks Available</th>
+                                    <!-- <th class="py-3 px-6 text-center">Created Date</th> -->
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 text-sm font-light" >
@@ -93,19 +74,25 @@
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <p class="font-medium">{{ inv.stocks }}</p>
+                                            <p class="font-medium">{{ inv.stock_in }}</p>
+                                        </div>
+                                    </td>
+
+                                    <td class="py-3 px-6 text-center">
+                                        <div class="flex items-center justify-center">
+                                            <p class="font-medium">{{ inv.stock_out || 0}}</p>
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <p class="font-medium">{{ formattedDate(inv.created_at)}}</p>
+                                            <p class="font-medium">{{ inv.Available }}</p>
                                         </div>
                                     </td>
-                                    <td class="py-3 px-6 text-center">
+                                    <!-- <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
                                             <p class="font-medium">{{ formattedDate(inv.updated_at)}}</p>
                                         </div>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>

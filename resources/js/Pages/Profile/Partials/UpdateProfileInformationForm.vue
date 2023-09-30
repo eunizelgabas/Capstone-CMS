@@ -17,7 +17,10 @@ defineProps({
 const user = usePage().props.auth.user;
 
 const form = useForm({
-    name: user.name,
+    lastname: user.lastname,
+    firstname:user.firstname,
+    middlename:user.middlename,
+    suffix:user.suffix,
     email: user.email,
 });
 </script>
@@ -33,56 +36,108 @@ const form = useForm({
         </header>
 
         <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
-            <div>
-                <InputLabel for="name" value="Name" />
+            <div class=" py-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 mx-auto">
+                <div class="sm:col-span-1">
 
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
+                        <InputLabel for="firstname" value="Firstname" />
 
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
+                        <TextInput
+                            id="firstname"
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="form.firstname"
+                            required
+                            autofocus
+                            autocomplete="name"
+                        />
 
-            <div>
-                <InputLabel for="email" value="Email" />
+                        <InputError class="mt-2" :message="form.errors.firstname" />
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div v-if="mustVerifyEmail && user.email_verified_at === null">
-                <p class="text-sm mt-2 text-gray-800">
-                    Your email address is unverified.
-                    <Link
-                        :href="route('verification.send')"
-                        method="post"
-                        as="button"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        Click here to re-send the verification email.
-                    </Link>
-                </p>
-
-                <div
-                    v-show="status === 'verification-link-sent'"
-                    class="mt-2 font-medium text-sm text-green-600"
-                >
-                    A new verification link has been sent to your email address.
                 </div>
+
+                <div class="sm:col-span-1">
+                    <InputLabel for="lastname" value="LastName" />
+
+                    <TextInput
+                        id="lastname"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.lastname"
+                        required
+                        autofocus
+                        autocomplete="name"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.lastname" />
+                </div>
+                <div class="sm:col-span-1">
+
+                    <InputLabel for="middlename" value="Middlename" />
+
+                    <TextInput
+                        id="middlename"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.middlename"
+                        autofocus
+                        autocomplete="name"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.middlename" />
+
+                </div>
+                <div class="sm:col-span-1">
+
+                    <InputLabel for="suffix" value="Suffix" />
+
+                    <TextInput
+                        id="suffix"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.suffix"
+                        autofocus
+                        autocomplete="name"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.suffix" />
+
+                </div>
+
+                <div class="sm:col-span-2">
+                    <InputLabel for="email" value="Email" />
+
+                    <TextInput
+                        id="email"
+                        type="email"
+                        class="mt-1 block w-full"
+                        v-model="form.email"
+                        required
+                        autocomplete="username"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.email" />
+                </div>
+                <div v-if="mustVerifyEmail && user.email_verified_at === null">
+                    <p class="text-sm mt-2 text-gray-800">
+                        Your email address is unverified.
+                        <Link
+                            :href="route('verification.send')"
+                            method="post"
+                            as="button"
+                            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        >
+                            Click here to re-send the verification email.
+                        </Link>
+                    </p>
+
+                    <div
+                        v-show="status === 'verification-link-sent'"
+                        class="mt-2 font-medium text-sm text-green-600"
+                    >
+                        A new verification link has been sent to your email address.
+                    </div>
+                </div>
+
             </div>
 
             <div class="flex items-center gap-4">

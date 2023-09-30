@@ -26,7 +26,6 @@ class MedicineController extends Controller
         if ($search) {
             $medicineQuery->where(function ($query) use ($search) {
                 $query->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('description', 'like', '%' . $search . '%')
                     ->orWhere('measurement', 'like', '%' . $search . '%');
             });
         }
@@ -49,11 +48,25 @@ class MedicineController extends Controller
             'cat_id'=>'required',
             'type_id' =>'required',
             'measurement' =>'required|string',
-            'description' =>'required|string'
+            'stock' => 'required|numeric'
+            // 'description' =>'required|string'
 
         ]);
 
-        Medicine::create($fields);
+       $med = Medicine::create($fields);
+
+        $inventory = Inventory::where('med_id', $med->id)->first();
+        if($inventory){
+            $inventory->stock_in += $med->stock;
+            // $inventory->stock_in += $stock->qty;
+            $inventory->save();
+        }else{
+            $inventory = new Inventory([
+                'med_id' => $med->id,
+                'stock_in' => $med->stock,    
+            ]);
+            $inventory->save();
+        }
 
         return redirect('/medicine')->with('message', 'Medicine successfully created');
     }
@@ -64,7 +77,8 @@ class MedicineController extends Controller
             'cat_id'=>'required',
             'type_id' =>'required',
             'measurement' =>'required|string',
-            'description' =>'required|string'
+            'stock' => 'required|numeric'
+            // 'description' =>'required|string'
         ]);
 
         $medicine->update($fields);

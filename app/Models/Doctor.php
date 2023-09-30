@@ -9,12 +9,12 @@ class Doctor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['lastname','firstname', 'status', 'email','gender', 'specialization', 'contact_no'];
+    protected $fillable = ['user_id', 'service_id', 'specialization', 'status'];
 
-    // public function service()
-    // {
-    //     return $this->hasOne(Service::class, 'doc_id');
-    // }
+    public function services()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
 
     public function user()
     {

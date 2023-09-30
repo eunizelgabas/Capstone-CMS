@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DispensingController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\InventoryController;
@@ -65,7 +66,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/stock/create', [StockController::class, 'create'])->name('inventory.create');
 
-    Route::get('/stock',[TemporaryStockController::class, 'index'])->name('stock.index');
+    Route::get('/stock',[StockController::class , 'index'])->name('stock.index');
     Route::post('/stock',[StockController::class, 'store'])->name('stock.create');
     Route::get('/stock/edit/{stock}', [StockController::class, 'edit']);
     Route::put('/stock/{stock}',[StockController::class, 'update']);
@@ -77,6 +78,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/doctor/edit/{doctor}', [DoctorController::class, 'edit']);
     Route::put('/doctor/{doctor}',[DoctorController::class, 'update']);
     Route::delete('/doctor/{doctor}', [DoctorController::class, 'destroy']);
+    Route::post('/doctor/{doctor}/activate', [DoctorController::class, 'activate'])->name('doctor.activate');
+    Route::post('/doctor/{doctor}/deactivate', [DoctorController::class, 'deactivate'])->name('doctor.deactivate');
 
     Route::get('/service/create', [ServiceController::class, 'create'])->name('service.create');
     Route::get('/service',[ServiceController::class, 'index'])->name('service.index');
@@ -89,6 +92,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/dispense/{dispense}',[DispensingController::class, 'update']);
     Route::post('/dispense',[DispensingController::class, 'store']);
     Route::delete('/dispense/{dispense}', [DispensingController::class, 'destroy']);
+
+    Route::get('/doctor/create', [AppointmentController::class, 'create'])->name('appointment.create');
+    Route::get('/appointment',[AppointmentController::class, 'index'])->name('appointment.index');
+    Route::post('/appointment',[AppointmentController::class, 'store'])->name('appointment.create');
+    Route::get('/appointment/edit/{appointment}', [AppointmentController::class, 'edit']);
+    Route::put('/appointment/{appointment}',[AppointmentController::class, 'update']);
+    Route::delete('/appointment/{appointment}', [AppointmentController::class, 'destroy']);
 });
 
 

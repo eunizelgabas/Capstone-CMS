@@ -17,10 +17,6 @@ const props = defineProps({
             class="px-1"
             :class="{ 'text-gray-500': ! link.url, 'font-bold text-xl text-black' : link.active}"
         />
-                <!-- <Link
-                    :is="links.url ? 'Link' : 'span' "
-                    v-for="link in links"
-                    :href=""
-                /> -->
+
     </div>
 </template>

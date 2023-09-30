@@ -32,6 +32,7 @@ class StockController extends Controller
     public function store(Request $request) {
         $fields = $request->validate([
             'med_id'=>'required|numeric',
+            'purchase_date' => 'required|date',
             'qty'=>'required',
             'expiry_date' =>'required',
 
@@ -39,15 +40,21 @@ class StockController extends Controller
 
         $stock = Stock::create($fields);
 
+        $medicine = Medicine::findOrFail($fields['med_id']);
+        $medicine->increment('stock', $fields['qty']);
+
         $inventory = Inventory::where('med_id', $stock->med_id)->first();
-        if ($inventory) {
-            $inventory->stocks += $stock->qty;
+        if($inventory){
+            $inventory->stock_in += $stock->qty;
+            // $inventory->stock_in += $stock->qty;
             $inventory->save();
-        } else {
-            Inventory::create([
-                'med_id' => $stock->med_id,
-                'stocks' => $stock->qty,
+        }else{
+            $inventory = new Inventory([
+                'med_id' => $medicine->id,
+                'stock_in' => $stock->qty,
+                
             ]);
+            $inventory->save();
         }
 
 
@@ -58,6 +65,7 @@ class StockController extends Controller
         $fields = $request->validate([
             'med_id'=>'required|numeric',
             'qty'=>'required',
+            'purchase_date' => 'required|date',
             'expiry_date' =>'required',
 
         ]);
