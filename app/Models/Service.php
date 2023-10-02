@@ -13,6 +13,10 @@ class Service extends Model
 
     public function doctor()
     {
-        return $this->hasMany(Service::class, 'doc_id');
+        return $this->belongsTo(Doctor::class, 'doc_id');
+    }
+
+    public function user(){
+        return $this->hasOneThrough(User::class, Doctor::class, 'id', 'id', 'doc_id', 'user_id');
     }
 }

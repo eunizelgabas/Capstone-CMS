@@ -15,19 +15,21 @@
 
     let form = useForm({
         name: '',
-        // doc_id: '',
+        doc_id: '',
         description: '',
     })
 
     let props = defineProps({
         services: Object,
+        doctor: Object,
+        // user:Object,
         filters: Object
     })
 
     function closeModal(){
         showConfirmDelete.value = false;
     }
-    function remove(service) {
+    function remove(serv) {
         selectedServiceForDelete = service
         showConfirmDelete.value = true;
         // deleteForm.delete('/service/' + selectedServiceForDelete.id)
@@ -40,6 +42,7 @@
 
     function edit(serv){
         form.name = serv.name
+        form.doc_id = serv.doc_id
         form.description = serv.description
         selectedService = serv
     }
@@ -47,11 +50,13 @@
     const submit = () =>{
         if(selectedService) {
             form.put('/service/' + selectedService.id)
-            form.name = "";
+            form.name = ""
+            form.doc_id = '',
             form.description = ""
         }else {
             form.post('/service')
-            form.name = "";
+            form.name = ""
+            form.doc_id = ""
             form.description = ""
         }
     }
@@ -97,15 +102,15 @@
                                             <input type="text" v-model="form.name" id="name" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
                                             <div class="text-sm text-red-500 italic" v-if="form.errors.name">{{ form.errors.name }}</div>
                                         </div>
-                                        <!-- <div class="flex flex-col">
+                                        <div class="flex flex-col">
                                             <label class="leading-loose">Doctor</label>
                                             <div class="relative focus-within:text-gray-600 text-gray-400 ">
                                               <select id="doc_id" name="doc_id" v-model="form.doc_id" class="pr-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
                                                   <option value="" disabled>Select a doctor</option>
-                                                  <option v-for="doc in doctors" :value="doc.id" :key="doc.id"> {{ doc.name }}</option>
+                                                  <option v-for="doc in doctor" :value="doc.id" :key="doc.id"> Dr. {{ doc.user.firstname }} {{ doc.user.lastname }}</option>
                                               </select>
                                             </div>
-                                        </div> -->
+                                        </div>
                                         <div class="flex flex-col">
                                             <label class="leading-loose">Description</label>
                                             <textarea type="text" v-model="form.description" id="description" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"></textarea>
@@ -145,7 +150,7 @@
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-left">Id</th>
                                     <th class="py-3 px-6 text-center">Name</th>
-                                    <!-- <th class="py-3 px-6 text-center">Doctor</th> -->
+                                    <th class="py-3 px-6 text-center">Doctor</th>
                                     <th class="py-3 px-6 text-center">Description</th>
                                     <th class="py-3 px-6 text-center">Action</th>
                                 </tr>
@@ -164,11 +169,11 @@
                                             <p class="font-medium">{{ serv.name }}</p>
                                         </div>
                                     </td>
-                                    <!-- <td class="py-3 px-6 text-center">
+                                    <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <p class="font-medium">{{ serv.doctor.name }}</p>
+                                            <p class="font-medium">{{ serv.doctor.user.firstname }} {{ serv.doctor.user.lastname }}</p>
                                         </div>
-                                    </td> -->
+                                    </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
                                             <p class="font-medium">{{ serv.description }}</p>

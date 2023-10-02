@@ -11,15 +11,15 @@ use Illuminate\Validation\Rules;
 class DoctorController extends Controller
 {
     public function index(){
-        $doctors = Doctor::with(['user', 'services'])->get();
+        $doctors = Doctor::with(['user'])->get();
         return inertia('Doctor/Index',[
             'doctors' =>$doctors
         ]);
     }
 
     public function create(){
-        $services = Service::all();
-        return inertia('Doctor/Create', ['services' => $services]);
+        // $services = Service::all();
+        return inertia('Doctor/Create');
     }
 
     public function store(Request $request){
@@ -38,7 +38,7 @@ class DoctorController extends Controller
 
         $doctor = new Doctor([
             'specialization' => $request->input('specialization'),
-            'service_id' => $request->input('service_id'),
+            // 'service_id' => $request->input('service_id'),
             'status' =>$request->input('status')
         ]);
 
@@ -52,8 +52,8 @@ class DoctorController extends Controller
     }
 
     public function edit(Doctor $doctors){
-        $services = Service::all();
-        return inertia('Doctor/Edit', ['doctors' => $doctors, 'services' => $services]);
+        // $services = Service::all();
+        return inertia('Doctor/Edit', ['doctors' => $doctors]);
     }
 
     public function update(Request $request, Doctor $doctors)
@@ -73,13 +73,13 @@ class DoctorController extends Controller
 
         // Update doctor details
         $doctors->update([
-            'service_id' => $request->service_id,
+            // 'service_id' => $request->service_id,
             'specialization' => $request->specialization,
 
         ]);
 
         // Sync the associated services
-        $doctors->services()->sync($request->input('services'));
+        // $doctors->services()->sync($request->input('services'));
 
         return redirect()->route('doctor.index');
     }

@@ -93,7 +93,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/dispense',[DispensingController::class, 'store']);
     Route::delete('/dispense/{dispense}', [DispensingController::class, 'destroy']);
 
-    Route::get('/doctor/create', [AppointmentController::class, 'create'])->name('appointment.create');
+    Route::get('/appointment/create', [AppointmentController::class, 'create'])->name('appointment.create');
     Route::get('/appointment',[AppointmentController::class, 'index'])->name('appointment.index');
     Route::post('/appointment',[AppointmentController::class, 'store'])->name('appointment.create');
     Route::get('/appointment/edit/{appointment}', [AppointmentController::class, 'edit']);

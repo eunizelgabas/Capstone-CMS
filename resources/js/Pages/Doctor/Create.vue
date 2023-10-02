@@ -17,12 +17,13 @@
         specialization: '',
         contact_no: '',
         // selectedServices: [],
-        service_id: ''
+        // service_id: ''
     })
 
     let props = defineProps({
         doctors: Array,
-        services:Object
+        user:Object
+        // services:Object
     })
 
     // const selectedServices = ref([]);
@@ -87,7 +88,7 @@
                             </div>
                           </div>
 
-                          <div class="sm:col-span-2">
+                          <!-- <div class="sm:col-span-2">
                             <label for="specialization" class="block text-sm font-medium leading-6 text-gray-900">Services</label>
                             <div class="mt-2">
                                 <select id="service_id" v-model="form.service_id" name="services" autocomplete="services"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
@@ -96,7 +97,7 @@
                                 </select>
                                 <div class="text-sm text-red-500 italic" v-if="form.errors.service_id">{{ form.errors.service_id }}</div>
                               </div>
-                          </div>
+                          </div> -->
 
                           <div class="sm:col-span-2">
                             <label for="contact_no" class="block text-sm font-medium leading-6 text-gray-900">Contact No</label>
@@ -115,7 +116,7 @@
                           </div>
 
 
-                          <div class="sm:col-span-1 sm:col-start-1">
+                          <div class="sm:col-span-2">
                             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                             <div class="mt-2">
                               <input id="email" v-model="form.email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
