@@ -11,9 +11,9 @@ class Doctor extends Model
 
     protected $fillable = ['user_id', 'specialization', 'status'];
 
-    public function service()
+    public function services()
     {
-        return $this->hasMany(Service::class, 'doc_id');
+        return $this->belongsToMany(Service::class);
     }
 
     public function user()

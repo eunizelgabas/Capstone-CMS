@@ -5,21 +5,24 @@
     import { useForm } from '@inertiajs/vue3';
 
     let form = useForm({
-        lastname: props.users.lastname,
-        firstname:props.users.firstname,
-        suffix: props.users.suffix,
-        email:props.users.email,
-        password:props.users.password,
+        // lastname: props.doctors.users.lastname,
+        // firstname:props.users.firstname,
+        // suffix: props.users.suffix,
+        // email:props.users.email,
+        // password:props.users.password,
         // password_confirmation:prop,
         // status:p,
-        gender:props.users.gender,
+        // gender:props.doctors.user.gender,
         specialization: props.doctors.specialization,
-        contact_no: props.users.contact_no,
+        selectedServiceIds: props.doctors.services
+
+        // contact_no: props.users.contact_no,
+
     })
 
     let props = defineProps({
-        doctors: Object,
-        users: Object
+        doctors: Object, // Doctor and User details
+        services: Array
     })
 
     const submit = () =>{
@@ -32,7 +35,7 @@
     <Head title="Update Doctor"/>
     <Sidebar>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Create Doctor</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Edit Doctor</h2>
         </template>
         <div>
             <div class="w-full mt-10 mx-auto px-4 ">

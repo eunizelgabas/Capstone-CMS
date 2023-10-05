@@ -42,7 +42,7 @@ const isCollapsed = ref(false);
             <!--Sidebar-->
             <div id="branding" class="mt-2" :class="hidden" >
                 <div class="flex items-center justify-center h-14 mb-5 border-gray-800">
-                    <img src="images/mdclogo.png" alt="" class="w-[70px] h-[70px] rounded-full object-cover">
+                    <img src="/images/mdclogo.png" alt="" class="w-[70px] h-[70px] rounded-full object-cover">
                     <span class="text-xl font-extrabold text-white my-5 px-4">MDC-CMS</span>
                     </div>
 

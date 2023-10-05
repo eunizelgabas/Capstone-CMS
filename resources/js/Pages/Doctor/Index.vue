@@ -22,7 +22,8 @@
 
     let props = defineProps({
         doctors: Array,
-        user:Object
+        user:Object,
+        services:Object
     })
 
     function closeModal(){
@@ -102,6 +103,7 @@
                                     <th class="py-3 px-6 text-center">Doctor Name</th>
                                     <th class="py-3 px-6 text-center">Gender</th>
                                     <th class="py-3 px-6 text-center">Specialization</th>
+                                    <th class="py-3 px-6 text-center">Services</th>
                                     <th class="py-3 px-6 text-center">Contact No</th>
                                     <th class="py-3 px-6 text-center">Status</th>
                                     <th class="py-3 px-6 text-center">Action</th>
@@ -126,9 +128,15 @@
                                             <p class="font-medium">{{ doc.user.gender }}</p>
                                         </div>
                                     </td>
+
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
                                             <p class="font-medium">{{ doc.specialization }}</p>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        <div class="flex items-center justify-center" v-for="service in doc.services" :key="service.id">
+                                            <p class="font-medium">{{ service.name }}</p>
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-center">

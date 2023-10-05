@@ -1,38 +1,31 @@
 <script setup>
     import Sidebar from '@/Layouts/Sidebar.vue';
     import { ref } from 'vue';
-    import { Link , Head, usePage} from '@inertiajs/vue3';
+    import { Link , Head} from '@inertiajs/vue3';
     import { useForm } from '@inertiajs/vue3';
-    // import Multiselect from 'vue-multiselect'
-    const { data } = usePage().props;
-    let form = useForm({
-        doctor_id: '',
-        lastname: '',
-        firstname:'',
-        suffix: '',
-        email:'',
-        password:'',
-        password_confirmation:'',
-        status:'',
-        gender:'',
-        specialization: '',
-        contact_no: '',
 
-        selectedServiceIds: []
+    let form = useForm({
+       'date' : '',
+       'time' : '',
+       'user_id': '',
+       'service_id': '',
+       'doc_id': '',
+       'status': '',
+       'reason': ''
+
     })
 
     let props = defineProps({
         doctors: Array,
-        user:Object,
-        services: Array
-
+        user:Object
+        // services:Object
     })
 
-    // const services = ref(data.services);
+    // const selectedServices = ref([]);
+    // const services = ref([]);
 
     const submit = () =>{
         form.post('/doctor')
-
     }
 
 </script>
@@ -78,7 +71,7 @@
                             </div>
                           </div>
 
-                          <div class="m:col-span-1">
+                          <div class="sm:col-span-1">
                             <label for="gender" class="block text-sm font-medium leading-6 text-gray-900">Gender</label>
                             <div class="mt-2">
                               <select id="gender" v-model="form.gender" name="gender" autocomplete="gender" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
@@ -90,38 +83,16 @@
                             </div>
                           </div>
 
-                          <div class="m:col-span-2">
-                            <label for="services" class="block text-sm font-medium leading-6 text-gray-900">Services</label>
+                          <!-- <div class="sm:col-span-2">
+                            <label for="specialization" class="block text-sm font-medium leading-6 text-gray-900">Services</label>
                             <div class="mt-2">
-                                <select id="services"  v-model="form.selectedServiceIds" name="selectedServiceIds[]" multiple  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 m:max-w-xs sm:text-sm sm:leading-6" >
+                                <select id="service_id" v-model="form.service_id" name="services" autocomplete="services"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
                                   <option selected disabled >Select services</option>
                                   <option v-for="service in services" :key="service.id" :value="service.id">{{ service.name }}</option>
                                 </select>
-                                <div class="text-sm text-red-500 italic" v-if="form.errors.services">{{ form.errors.services }}</div>
+                                <div class="text-sm text-red-500 italic" v-if="form.errors.service_id">{{ form.errors.service_id }}</div>
                               </div>
-                              <!-- <div class="w-full">
-                                <label class="inline-block text-sm text-gray-600" for="Multiselect"
-                                  >Select multiple roles</label
-                                >
-                                <div class="relative flex w-full">
-                                  <select
-                                    id="select-role"
-                                    name="selectedServiceIds[]"
-                                    multiple
-                                    placeholder="Select roles..."
-                                    autocomplete="off"
-                                    class="block w-full rounded-sm cursor-pointer focus:outline-none"
-
-                                  >
-                                    <option value="1">super admin</option>
-                                    <option value="2">admin</option>
-                                    <option value="3">writer</option>
-                                    <option value="4">user</option>
-                                  </select>
-                                </div>
-                              </div> -->
-
-                          </div>
+                          </div> -->
 
                           <div class="sm:col-span-2">
                             <label for="contact_no" class="block text-sm font-medium leading-6 text-gray-900">Contact No</label>
@@ -144,7 +115,7 @@
                             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                             <div class="mt-2">
                               <input id="email" v-model="form.email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                              <div class="text-sm text-red-500 italic" v-if="form.errors.email">{{ form.errors.email }}</div>
+                              <div class="text-sm text-red-500 italic" v-if="form.errors.gender">{{ form.errors.gender }}</div>
                             </div>
                           </div>
 

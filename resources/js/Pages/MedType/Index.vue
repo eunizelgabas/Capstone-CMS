@@ -19,7 +19,7 @@
     let deleteForm = useForm({});
 
     let props = defineProps({
-    medtypes: Array,
+    medtypes: Object,
     filters:Object,
     })
 

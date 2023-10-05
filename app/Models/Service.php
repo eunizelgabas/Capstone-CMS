@@ -9,14 +9,14 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['doc_id', 'name' , 'description'];
+    protected $fillable = ['name' , 'description'];
 
-    public function doctor()
+    public function doctors()
     {
-        return $this->belongsTo(Doctor::class, 'doc_id');
+        return $this->belongsToMany(Doctor::class);
     }
 
-    public function user(){
-        return $this->hasOneThrough(User::class, Doctor::class, 'id', 'id', 'doc_id', 'user_id');
-    }
+    // public function user(){
+    //     return $this->hasOneThrough(User::class, Doctor::class, 'id', 'id', 'doc_id', 'user_id');
+    // }
 }

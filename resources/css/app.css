@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url(https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css);
+@import url(https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js);
 
 .btn-primary{
     @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
