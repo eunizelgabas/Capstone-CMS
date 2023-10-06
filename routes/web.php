@@ -78,6 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/doctor/edit/{doctor}', [DoctorController::class, 'edit']);
     Route::put('/doctor/{doctor}',[DoctorController::class, 'update']);
     Route::delete('/doctor/{doctor}', [DoctorController::class, 'destroy']);
+    Route::get('/doctor/show/{doctor}', [DoctorController::class, 'show']);
     Route::post('/doctor/{doctor}/activate', [DoctorController::class, 'activate'])->name('doctor.activate');
     Route::post('/doctor/{doctor}/deactivate', [DoctorController::class, 'deactivate'])->name('doctor.deactivate');
 
@@ -99,6 +100,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/appointment/edit/{appointment}', [AppointmentController::class, 'edit']);
     Route::put('/appointment/{appointment}',[AppointmentController::class, 'update']);
     Route::delete('/appointment/{appointment}', [AppointmentController::class, 'destroy']);
+    Route::get('/api/doctor/{doctorId}/services',[AppointmentController::class, 'getDoctorServices']);
 });
 
 

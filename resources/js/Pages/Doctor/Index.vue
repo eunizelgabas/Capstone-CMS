@@ -1,9 +1,7 @@
 <script setup>
     import Sidebar from '@/Layouts/Sidebar.vue';
-    import Modal from  '@/Components/Modal.vue';
-    import { onMounted, ref } from 'vue';
+    import { ref } from 'vue';
     import { Link, router, useForm, Head } from '@inertiajs/vue3';
-    import { Inertia } from '@inertiajs/inertia-vue3'
 
     let showConfirm = ref(false)
     let selectedDoctorForDelete = null
@@ -48,24 +46,24 @@
     //   return status === 1 ? 'Active' : 'Inactive';
     // };
 
-    function openInactiveDoctorsModal() {
-        showConfirm.value = true;
-    }
+    // function openInactiveDoctorsModal() {
+    //     showConfirm.value = true;
+    // }
 
 
-    const activateDoctor  = () => {
-            // Send a request to activate the doctor's status using Inertia.js
-             router.post(`/doctor/${props.doctors.id}/activate`);
-            // Reload the page or update the doctor data as needed
-            router.reload();
-        };
+    // const activateDoctor  = () => {
+    //         // Send a request to activate the doctor's status using Inertia.js
+    //          router.post(`/doctor/${props.doctors.id}/activate`);
+    //         // Reload the page or update the doctor data as needed
+    //         router.reload();
+    //     };
 
-        const deactivateDoctor = () => {
-            // Send a request to deactivate the doctor's status using Inertia.js
-             router.post(`/doctor/${props.doctors.id}/deactivate`);
-            // Reload the page or update the doctor data as needed
-            router.reload();
-        };
+    //     const deactivateDoctor = () => {
+    //         // Send a request to deactivate the doctor's status using Inertia.js
+    //          router.post(`/doctor/${props.doctors.id}/deactivate`);
+    //         // Reload the page or update the doctor data as needed
+    //         router.reload();
+    //     };
 
     const submit = () =>{
         if(selectedDoctor) {
@@ -161,7 +159,7 @@
                                                 </a>
                                             </div> -->
                                             <div class="flex item-center justify-center">
-                                                <div class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110" v-if="!doc.status">
+                                                <!-- <div class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110" v-if="!doc.status">
                                                     <a href="#" class="btn" @click="activateDoctor">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-6 6m0 0l-6-6m6 6V9a6 6 0 0112 0v3" />
@@ -174,21 +172,31 @@
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-6 6m0 0l-6-6m6 6V9a6 6 0 0112 0v3" />
                                                           </svg>
                                                     </a>
-                                                </div>
+                                                </div> -->
+                                                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                                    <Link :href="'/doctor/show/'+ doc.id" title="Show Details">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                        </svg>
+                                                    </Link>
+
+
+                                            </div>
                                             </div>
                                             <div class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110">
-                                                <Link :href=" '/doctor/edit/' + doc.id" class="btn">
+                                                <Link :href=" '/doctor/edit/' + doc.id" class="btn" title="Edit Doctor">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                     </svg>
                                                 </Link>
                                             </div>
                                             <div class="w-4  ml-2 mr-2 transform hover:text-red-500 hover:scale-110">
-                                                <a href="#" class="btn">
+                                                <Link href="#" @click="remove(doc)" class="btn" title="Delete Doctor">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                     </svg>
-                                                </a>
+                                                </Link>
                                             </div>
                                         </div>
                                     </td>

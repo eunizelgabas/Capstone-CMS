@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('measurement');
             // $table->string('description');
-            $table->integer('stock');
+            $table->integer('stock')->default(0);
             $table->timestamps();
             $table->foreign('cat_id')->references('id')->on('med_categories');
             $table->foreign('type_id')->references('id')->on('med_types');

@@ -236,7 +236,7 @@
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <p class="font-medium">{{med.stock}}</p>
+                                            <p class="font-medium"> {{ med.stock}}</p>
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-center">

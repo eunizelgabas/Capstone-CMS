@@ -16,6 +16,9 @@ class Service extends Model
         return $this->belongsToMany(Doctor::class);
     }
 
+    public function appointment(){
+        return $this->hasMany(Appointment::class);
+    }
     // public function user(){
     //     return $this->hasOneThrough(User::class, Doctor::class, 'id', 'id', 'doc_id', 'user_id');
     // }

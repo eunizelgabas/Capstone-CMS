@@ -58,7 +58,6 @@ class MedicineController extends Controller
         $inventory = Inventory::where('med_id', $med->id)->first();
         if($inventory){
             $inventory->stock_in += $med->stock;
-            // $inventory->stock_in += $stock->qty;
             $inventory->save();
         }else{
             $inventory = new Inventory([

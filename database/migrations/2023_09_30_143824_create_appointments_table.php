@@ -18,12 +18,12 @@ return new class extends Migration
             $table->time('time');
             $table->string('status');
             $table->bigInteger('doc_id')->unsigned();
-            $table->bigInteger('service_id')->unsigned();
+            // $table->bigInteger('service_id')->unsigned();
             $table->string('reason')->nullable();
             $table->timestamps();
-            $table->foreign('doc_id')->references('id')->on('doctors');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('service_id')->references('id')->on('services');
+            $table->foreign('doc_id')->references('id')->on('doctors')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+            // $table->foreign('service_id')->references('id')->on('services');
         });
     }
 
