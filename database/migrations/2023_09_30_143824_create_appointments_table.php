@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
+            // $table->bigInteger('user_id')->unsigned();
             $table->date('date');
+            $table->string('name');
             $table->time('time');
-            $table->string('status');
-            $table->bigInteger('doc_id')->unsigned();
+            $table->string('status')->default('Pending');
+            $table->bigInteger('doctor_id')->unsigned();
             $table->bigInteger('service_id')->unsigned();
             $table->string('reason')->nullable();
             $table->timestamps();
-            $table->foreign('doc_id')->references('id')->on('doctors');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('doctor_id')->references('id')->on('doctors');
+            // $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('service_id')->references('id')->on('services');
         });
     }

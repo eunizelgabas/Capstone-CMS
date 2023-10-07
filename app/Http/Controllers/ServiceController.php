@@ -48,7 +48,7 @@ class ServiceController extends Controller
     public function store(Request $request) {
         $fields = $request->validate([
             'name'=>'required',
-            'doc_id'=>'required',
+            'doctor_id'=>'required',
             'description'=>'required',
         ]);
 

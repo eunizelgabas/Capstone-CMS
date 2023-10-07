@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->bigInteger('doc_id')->unsigned();
+            $table->bigInteger('doctor_id')->unsigned();
             $table->timestamps();
-            $table->foreign('doc_id')->references('id')->on('doctors');
+            $table->foreign('doctor_id')->references('id')->on('doctors');
         });
     }
 

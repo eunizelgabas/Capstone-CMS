@@ -45,6 +45,15 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
             RolesSeeder::class,
+            AppointmentSeeder::class,
+            DispensingSeeder::class,
+            DoctorSeeder::class,
+            InventorySeeder::class,
+            MedCategorySeeder::class,
+            MedicineSeeder::class,
+            MedTypeSeeder::class,
+            ServiceSeeder::class,
+            StockSeeder::class,
             // UserSeeder::class
         ]);
     }

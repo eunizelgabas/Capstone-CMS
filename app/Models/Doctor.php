@@ -13,7 +13,7 @@ class Doctor extends Model
 
     public function service()
     {
-        return $this->hasMany(Service::class, 'doc_id');
+        return $this->hasMany(Service::class, 'doctor_id');
     }
 
     public function user()
