@@ -24,7 +24,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'gender' => $faker->randomElement(['male', 'female']),//the gender does not match the name as it is.
-            'contact_no' => ffake()->unique()->e164PhoneNumber(),
+            'contact_no' => fake()->unique()->e164PhoneNumber(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
         ];
